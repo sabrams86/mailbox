@@ -1,0 +1,19 @@
+[
+  {
+    "id": 1,
+    "subject": "connecting the systems won't do anything",
+    "read": true,
+    "starred": false,
+    "labels": [
+      "dev",
+      "personal"
+    ]
+  },
+  {
+    "id": 47,
+    "subject": "We need to index the mobile PCI bus",
+    "read": false,
+    "starred": true,
+    "labels": []
+  }
+]

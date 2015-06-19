@@ -1,0 +1,27 @@
+extends ./../layout
+
+block content
+  h1 Inbox
+  div.inbox
+    div.menu
+    div.messages
+      table.emails.table
+        //- for email in emails
+        tr.unread
+          td.select
+            input(type='checkbox' name='select')
+          td.star
+            i.fa.fa-star-o
+          td.snippet New from your spam king!!! LOTS OF STUFF YOU NEED!
+        tr.unread
+          td.select
+            input(type='checkbox' name='select')
+          td.star
+            i.fa.fa-star-o
+          td.snippet New from your spam king!!! LOTS OF STUFF YOU NEED!          
+        tr.unread
+          td.select
+            input(type='checkbox' name='select')
+          td.star
+            i.fa.fa-star-o
+          td.snippet New from your spam king!!! LOTS OF STUFF YOU NEED!              
