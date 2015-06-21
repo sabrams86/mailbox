@@ -7,10 +7,10 @@ block content
   div.inbox
     div.menu.navbar.navbar-defualt
       form(method='get' action='/index')
-        button.navbar-btn.select-all-emails.btn.btn-default(type='submit' disabled='disabled')
+        button.navbar-btn.select-all-emails.btn.btn-default(type='button')
           i.fa.fa-square-o
         button.mark-as-read.btn.btn-default(type='submit' disabled='disabled') Mark As Read
-        button.mark-as-read.btn.btn-default(type='submit' disabled='disabled') Mark As Unread
+        button.mark-as-unread.btn.btn-default(type='submit' disabled='disabled') Mark As Unread
         div.dropdown
           button#dLabel.apply-label.btn.btn-default(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Apply Label 
             span(class='caret')
@@ -37,40 +37,10 @@ block content
           span.unread-count unread messages
     div.messages
       table.emails.table.table-hover
-        //- for email in emails
-        tr.unread
-          td.select-email
-            input(type='checkbox' name='select')
-          td.star-email
-            i.fa.fa-star-o
-          td.snippet New from your spam king!!! LOTS OF STUFF YOU NEED!
-        tr.unread
-          td.select-email
-            input(type='checkbox' name='select')
-          td.star
-            i.fa.fa-star-o
-          td.snippet New from your spam king!!! LOTS OF STUFF YOU NEED!          
-        tr.unread
-          td.select-email
-            input(type='checkbox' name='select')
-          td.star
-            i.fa.fa-star-o
-          td.snippet New from your spam king!!! LOTS OF STUFF YOU NEED!          
-        tr.unread
-          td.select-email
-            input(type='checkbox' name='select')
-          td.star
-            i.fa.fa-star-o
-          td.snippet New from your spam king!!! LOTS OF STUFF YOU NEED!
-        tr.unread
-          td.select-email
-            input(type='checkbox' name='select')
-          td.star
-            i.fa.fa-star-o
-          td.snippet New from your spam king!!! LOTS OF STUFF YOU NEED!  
-        tr.unread
-          td.select-email
-            input(type='checkbox' name='select')
-          td.star
-            i.fa.fa-star-o
-          td.snippet New from your spam king!!! LOTS OF STUFF YOU NEED!  
+        for email in emails
+          tr.unread
+            td.select-email
+              input.checkbox(type='checkbox' name='select')
+            td.star-email
+              i.fa.fa-star-o
+            td.snippet= email.subject
