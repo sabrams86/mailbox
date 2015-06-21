@@ -1,8 +1,33 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  min-width: 650px;
 }
 
 a {
   color: #00B7FF;
+}
+
+.dropdown{
+  display: inline-block;
+}
+
+.select-email{
+  width: 2em;
+}
+
+.menu{
+  display: block;
+}
+
+.right {
+  float: right;
+}
+
+.unread-count{
+  vertical-align: center;
+}
+
+.title {
+  display: inline-block;
 }

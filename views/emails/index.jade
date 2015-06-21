@@ -1,27 +1,76 @@
 extends ./../layout
 
 block content
-  h1 Inbox
+  div.page-header
+    h1.title mailbox 
+      small Inbox
   div.inbox
-    div.menu
+    div.menu.navbar.navbar-defualt
+      form(method='get' action='/index')
+        button.navbar-btn.select-all-emails.btn.btn-default(type='submit' disabled='disabled')
+          i.fa.fa-square-o
+        button.mark-as-read.btn.btn-default(type='submit' disabled='disabled') Mark As Read
+        button.mark-as-read.btn.btn-default(type='submit' disabled='disabled') Mark As Unread
+        div.dropdown
+          button#dLabel.apply-label.btn.btn-default(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Apply Label 
+            span(class='caret')
+          ul.dropdown-menu(aria-labelledby='dLabel')
+            li
+              a(href='#') Work
+            li 
+              a(href='#') Personal
+            li 
+              a(href='#') WebDev
+        div.dropdown
+          button#dLabel.apply-label.btn.btn-default(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Apply Label 
+            span(class='caret')
+          ul.dropdown-menu(aria-labelledby='dLabel')
+            li 
+              a(href='#') Work
+            li 
+              a(href='#') Personal
+            li 
+              a(href='#') WebDev
+        button.delete-selected-emails.btn.btn-default(type='submit' disabled='disabled')
+          i.fa.fa-trash-o
+        div.right
+          span.unread-count unread messages
     div.messages
-      table.emails.table
+      table.emails.table.table-hover
         //- for email in emails
         tr.unread
-          td.select
+          td.select-email
             input(type='checkbox' name='select')
-          td.star
+          td.star-email
             i.fa.fa-star-o
           td.snippet New from your spam king!!! LOTS OF STUFF YOU NEED!
         tr.unread
-          td.select
+          td.select-email
             input(type='checkbox' name='select')
           td.star
             i.fa.fa-star-o
           td.snippet New from your spam king!!! LOTS OF STUFF YOU NEED!          
         tr.unread
-          td.select
+          td.select-email
             input(type='checkbox' name='select')
           td.star
             i.fa.fa-star-o
-          td.snippet New from your spam king!!! LOTS OF STUFF YOU NEED!              
+          td.snippet New from your spam king!!! LOTS OF STUFF YOU NEED!          
+        tr.unread
+          td.select-email
+            input(type='checkbox' name='select')
+          td.star
+            i.fa.fa-star-o
+          td.snippet New from your spam king!!! LOTS OF STUFF YOU NEED!
+        tr.unread
+          td.select-email
+            input(type='checkbox' name='select')
+          td.star
+            i.fa.fa-star-o
+          td.snippet New from your spam king!!! LOTS OF STUFF YOU NEED!  
+        tr.unread
+          td.select-email
+            input(type='checkbox' name='select')
+          td.star
+            i.fa.fa-star-o
+          td.snippet New from your spam king!!! LOTS OF STUFF YOU NEED!  
