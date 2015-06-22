@@ -69,10 +69,24 @@ router.post('/inbox/:id', function(req, res, next){
   } else if (read != undefined){
     mail.update({ _id: req.params.id }, {$set: {read: read}});
   } else if (label != undefined){
-    mail.update({ _id: req.params.id }, {$push: {labels: label}})
+    mail.update({ _id: req.params.id }, {$push: {labels: label}});
   }
   res.send('ok');
 });
+
+//*****************
+//**remove label **
+//*****************
+router.post('/inbox/:id/removelabel', function(req, res, next){
+  var label = req.body.label;
+  var is_ajax_request = req.xhr;
+  if (label != undefined){
+    console.log(label);
+    mail.update({ _id: req.params.id }, {$pull: {labels: label}});
+  }
+  res.send('ok');
+});
+
 
 //***********
 //**destroy**

@@ -24,12 +24,9 @@ block content
         button#dLabel.apply-label.btn.btn-default(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Remove Label 
           span(class='caret')
         ul.dropdown-menu(aria-labelledby='dLabel')
-          li 
-            a(href='#') Work
-          li 
-            a(href='#') Personal
-          li 
-            a(href='#') WebDev
+          each label in labels
+            li
+              a.remove-label(href='#')= label.name
       button.delete-selected-emails.btn.btn-default(type='button' disabled='disabled')
         i.fa.fa-trash-o
       div.right
@@ -50,5 +47,5 @@ block content
               i.star.fa.fa-star-o
           td.snippet
             each label in email.labels
-              span.label= label
+              span.label(class='#{label}')= label
             span= email.subject
