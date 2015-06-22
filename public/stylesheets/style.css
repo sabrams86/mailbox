@@ -49,3 +49,12 @@ a {
 .checked {
   background-color: #fffae4;
 }
+
+.new-label {
+  display: inline;
+}
+
+.label-field{
+  margin-left: 3px;
+  text-align: center;
+}

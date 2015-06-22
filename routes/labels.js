@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var db = require('./../connection');
-var labelCollection = db.get('labelCollection');
+var labelCollection = db.get('labelConnection');
 
 //***********
 //** Index **
@@ -14,7 +14,9 @@ router.get('/index', function(req,res,next){
 //** Create**
 //***********
 router.post('/index', function(req,res,next){
-  res.send('ok');
+  var newLabel = req.body.newlabel;
+  labelCollection.insert({name: newLabel});
+  res.redirect('/inbox');
 });
 
 //***********

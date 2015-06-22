@@ -2,24 +2,29 @@ var express = require('express');
 var router = express.Router();
 var db = require('./../connection');
 var mail = db.get('inboxCollection');
+var labelCollection = db.get('labelConnection');
+
 
 //***********
 //** index **
 //***********
 router.get('/inbox', function(req, res, next){
-  mail.find({}, {}, function( err, docs){
-    var unreadCount = 0;
-    docs.forEach(function(e){
-      if(e.read === false){
-        unreadCount += 1;
+  labelCollection.find({}, {}, function(labelErr, labelDocs){
+    console.log(labelDocs);
+    mail.find({}, {}, function( err, docs){
+      var unreadCount = 0;
+      docs.forEach(function(e){
+        if(e.read === false){
+          unreadCount += 1;
+        }
+      });
+      var is_ajax_request = req.xhr;
+      if (is_ajax_request) {
+        res.json(docs);
+      } else {
+        res.render('./emails/index', {emails: docs, unreadCount: unreadCount, labels: labelDocs});
       }
     });
-    var is_ajax_request = req.xhr;
-    if (is_ajax_request) {
-      res.json(docs);
-    } else {
-      res.render('./emails/index', {emails: docs, unreadCount: unreadCount});
-    }
   });
 });
 
