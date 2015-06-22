@@ -62,11 +62,14 @@ router.post('/inbox', function(req, res, next){
 router.post('/inbox/:id', function(req, res, next){
   var starred = req.body.starred;
   var read = req.body.read;
+  var label = req.body.label;
   var is_ajax_request = req.xhr;
   if (starred != undefined){
     mail.update({ _id: req.params.id }, {$set: {starred: starred}});
   } else if (read != undefined){
     mail.update({ _id: req.params.id }, {$set: {read: read}});
+  } else if (label != undefined){
+    mail.update({ _id: req.params.id }, {$push: {labels: label}})
   }
   res.send('ok');
 });

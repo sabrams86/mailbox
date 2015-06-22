@@ -16,7 +16,7 @@ block content
         ul.dropdown-menu(aria-labelledby='dLabel')
           each label in labels
             li
-              a(href='#')= label.name
+              a.add-label(href='#')= label.name
           li
             form.new-label(action='/labels/index' method='post')
               input.label-field(type='text' name='newlabel' placeholder='create new label...')
@@ -48,4 +48,7 @@ block content
               i.star.fa.fa-star
             else
               i.star.fa.fa-star-o
-          td.snippet= email.subject
+          td.snippet
+            each label in email.labels
+              span.label= label
+            span= email.subject
