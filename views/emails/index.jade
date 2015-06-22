@@ -39,8 +39,13 @@ block content
       table.emails.table.table-hover
         for email in emails
           tr.unread
+            td.email-id
+              div.info(name='#{email._id}')
             td.select-email
-              input.checkbox(type='checkbox' name='select')
+                input.checkbox(type='checkbox' name='select')
             td.star-email
-              i.fa.fa-star-o
+              if email.starred === true
+                i.star.fa.fa-star
+              else
+                i.star.fa.fa-star-o
             td.snippet= email.subject

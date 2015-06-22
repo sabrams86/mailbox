@@ -31,3 +31,7 @@ a {
 .title {
   display: inline-block;
 }
+
+.email-id {
+  display: none;
+}

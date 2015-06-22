@@ -43,8 +43,10 @@ router.post('/inbox', function(req, res, next){
 //***********
 //**update **
 //***********
-router.post('/inbox/id:', function(req, res, next){
-  res.redirect('./emails/show');
+router.post('/inbox/:id', function(req, res, next){
+  var starred = req.body.starred;
+  mail.update({ _id: req.params.id }, {$set: {starred: starred}});
+  res.send('ok');
 });
 
 //***********
