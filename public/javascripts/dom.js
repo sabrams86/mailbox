@@ -116,6 +116,7 @@ $(document).ready(function(){
       var xhr = new XMLHttpRequest;
       xhr.open('post', '/inbox/'+id, true)
       xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+      xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
       xhr.send(JSON.stringify(data));
     });
   });
@@ -132,6 +133,7 @@ $(document).ready(function(){
       var xhr = new XMLHttpRequest;
       xhr.open('post', '/inbox/'+id, true)
       xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+      xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
       xhr.send(JSON.stringify(data));
     });
   });
@@ -142,8 +144,10 @@ $(document).ready(function(){
       var id = $(this).parents('tr').children('td:first').children('div').attr('name');
       var xhr = new XMLHttpRequest;
       xhr.open('post', '/inbox/'+id+'/delete', true)
+      xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
       xhr.send();
       $(this).parents('tr').remove();
+      $('.mark-as-read, .mark-as-unread, .delete-selected-emails').attr('disabled', 'disabled');
     });
   });
 

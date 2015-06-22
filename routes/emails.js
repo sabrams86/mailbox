@@ -14,7 +14,12 @@ router.get('/inbox', function(req, res, next){
         unreadCount += 1;
       }
     });
-    res.render('./emails/index', {emails: docs, unreadCount: unreadCount});
+    var is_ajax_request = req.xhr;
+    if (is_ajax_request) {
+      res.json(docs);
+    } else {
+      res.render('./emails/index', {emails: docs, unreadCount: unreadCount});
+    }
   });
 });
 
@@ -52,7 +57,7 @@ router.post('/inbox', function(req, res, next){
 router.post('/inbox/:id', function(req, res, next){
   var starred = req.body.starred;
   var read = req.body.read;
-  console.log(read);
+  var is_ajax_request = req.xhr;
   if (starred != undefined){
     mail.update({ _id: req.params.id }, {$set: {starred: starred}});
   } else if (read != undefined){

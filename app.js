@@ -9,6 +9,7 @@ var mongo = require('mongodb');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var emails = require('./routes/emails');
+var labels = require('./routes/labels');
 
 var app = express();
 
@@ -27,6 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/', emails);
+app.use('/labels', labels);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
