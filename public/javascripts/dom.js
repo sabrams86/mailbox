@@ -108,6 +108,8 @@ $(document).ready(function(){
     var selected = $(':checked');
     selected.each(function(e){
       var id = $(this).parents('tr').children('td:first').children('div').attr('name');
+      var count = $('.unread-count');
+      count.html(Number(count.html()) - 1);
       $(this).parents('tr').removeClass('unread');
       $(this).parents('tr').addClass('read');
       var data = {"read": true};
@@ -122,6 +124,8 @@ $(document).ready(function(){
     var selected = $(':checked');
     selected.each(function(e){
       var id = $(this).parents('tr').children('td:first').children('div').attr('name');
+      var count = $('.unread-count');
+      count.html(Number(count.html()) + 1);
       $(this).parents('tr').removeClass('read');
       $(this).parents('tr').addClass('unread');
       var data = {"read": false};

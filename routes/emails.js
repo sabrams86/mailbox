@@ -8,7 +8,13 @@ var mail = db.get('inboxCollection');
 //***********
 router.get('/inbox', function(req, res, next){
   mail.find({}, {}, function( err, docs){
-    res.render('./emails/index', {emails: docs});
+    var unreadCount = 0;
+    docs.forEach(function(e){
+      if(e.read === false){
+        unreadCount += 1;
+      }
+    });
+    res.render('./emails/index', {emails: docs, unreadCount: unreadCount});
   });
 });
 
