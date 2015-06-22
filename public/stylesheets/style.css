@@ -35,3 +35,17 @@ a {
 .email-id {
   display: none;
 }
+
+.read {
+  background-color: white;
+  font-weight: normal;
+}
+
+.unread {
+  background-color: #f0f0f0;
+  font-weight: bolder;
+}
+
+.checked {
+  background-color: #fffae4;
+}

@@ -9,8 +9,8 @@ block content
       form(method='get' action='/index')
         button.navbar-btn.select-all-emails.btn.btn-default(type='button')
           i.fa.fa-square-o
-        button.mark-as-read.btn.btn-default(type='submit' disabled='disabled') Mark As Read
-        button.mark-as-unread.btn.btn-default(type='submit' disabled='disabled') Mark As Unread
+        button.mark-as-read.btn.btn-default(type='button' disabled='disabled') Mark As Read
+        button.mark-as-unread.btn.btn-default(type='button' disabled='disabled') Mark As Unread
         div.dropdown
           button#dLabel.apply-label.btn.btn-default(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Apply Label 
             span(class='caret')
@@ -31,18 +31,18 @@ block content
               a(href='#') Personal
             li 
               a(href='#') WebDev
-        button.delete-selected-emails.btn.btn-default(type='submit' disabled='disabled')
+        button.delete-selected-emails.btn.btn-default(type='button' disabled='disabled')
           i.fa.fa-trash-o
         div.right
           span.unread-count unread messages
     div.messages
-      table.emails.table.table-hover
+      table.emails.table.table-default
         for email in emails
-          tr.unread
+          tr(class=(email.read === true ? 'read' : 'unread'))
             td.email-id
               div.info(name='#{email._id}')
             td.select-email
-                input.checkbox(type='checkbox' name='select')
+              input.checkbox(type='checkbox' name='select')
             td.star-email
               if email.starred === true
                 i.star.fa.fa-star

@@ -45,7 +45,13 @@ router.post('/inbox', function(req, res, next){
 //***********
 router.post('/inbox/:id', function(req, res, next){
   var starred = req.body.starred;
-  mail.update({ _id: req.params.id }, {$set: {starred: starred}});
+  var read = req.body.read;
+  console.log(read);
+  if (starred != undefined){
+    mail.update({ _id: req.params.id }, {$set: {starred: starred}});
+  } else if (read != undefined){
+    mail.update({ _id: req.params.id }, {$set: {read: read}});
+  }
   res.send('ok');
 });
 
@@ -53,7 +59,8 @@ router.post('/inbox/:id', function(req, res, next){
 //**destroy**
 //***********
 router.post('/inbox/:id/delete', function(req, res, next){
-  res.redirect('./emails/index');
+  mail.remove({ _id: req.params.id });
+  res.send('ok');
 });
 
 module.exports = router;
