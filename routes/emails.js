@@ -70,7 +70,7 @@ router.post('/inbox/:id', function(req, res, next){
     mail.update({ _id: req.params.id }, {$set: {read: read}});
   } else if (label != undefined){
     mail.findOne({_id: req.params.id}, function(err, doc){
-      var matches = doc.labels.filter(function(e){ return label === e }).length;
+      var matches = doc.labels.filter(function(e){ return label.toLowerCase() === e.toLowerCase() }).length;
       if (matches === 0) {
         mail.update({ _id: req.params.id }, {$push: {labels: label}});
       }

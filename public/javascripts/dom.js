@@ -97,17 +97,24 @@ $(document).ready(function(){
       } else {
         checkAllIcon.addClass('fa-check-square-o, fa-square-o');
         checkAllIcon.removeClass('fa-minus-square-o');
+        $('.remove-label-menu')[0].innerHTML = null;
         $('.mark-as-read, .mark-as-unread, .delete-selected-emails').attr('disabled', 'disabled');
       }
 
       //update remove label list to only include labels from emails that are selected
-      var labelSpans = $(this).parents('tr').children('.snippet').children('span');
-      console.log(labelSpans);
+      var labelSpans = $(':checked').parents('tr').children('.snippet').children('.label');
       var labels = [];
-      for (var span in labelSpans){
-        labels.push(span.innerHTML);
+      var currentLabels = $('.remove-label-menu').children('li').children('a');
+      for (var j = 0; j < currentLabels.length; j++){
+        labels.push(currentLabels[j].innerHTML);
       }
-      console.log(labels);
+      for (var i = 0; i < labelSpans.length; i++){
+        labels.push(labelSpans[i].innerHTML);
+      }
+      labels = labels.filter(function(e,i){
+        return labels.indexOf(e) === i;
+      });
+      $('.remove-label-menu')[0].innerHTML = null;
       labels.forEach(function(e){
         var li = document.createElement('li');
         var a = document.createElement('a');
@@ -115,7 +122,7 @@ $(document).ready(function(){
         a.href = '#';
         a.innerHTML = e;
         li.appendChild(a);
-        $('.remove-label-menu').appendChild(li);
+        $('.remove-label-menu')[0].appendChild(li);
       });
     });
   });
