@@ -69,7 +69,12 @@ router.post('/inbox/:id', function(req, res, next){
   } else if (read != undefined){
     mail.update({ _id: req.params.id }, {$set: {read: read}});
   } else if (label != undefined){
-    mail.update({ _id: req.params.id }, {$push: {labels: label}});
+    mail.findOne({_id: req.params.id}, function(err, doc){
+      var matches = doc.labels.filter(function(e){ return label === e }).length;
+      if (matches === 0) {
+        mail.update({ _id: req.params.id }, {$push: {labels: label}});
+      }
+    });
   }
   res.send('ok');
 });

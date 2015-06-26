@@ -23,7 +23,7 @@ block content
       div.dropdown
         button#dLabel.apply-label.btn.btn-default(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Remove Label 
           span(class='caret')
-        ul.dropdown-menu(aria-labelledby='dLabel')
+        ul.remove-label-menu.dropdown-menu(aria-labelledby='dLabel')
           each label in labels
             li
               a.remove-label(href='#')= label.name

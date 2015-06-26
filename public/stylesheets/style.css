@@ -26,6 +26,13 @@ a {
 
 .unread-count{
   vertical-align: center;
+  display: inline-block;
+  text-align: center;
+  color: white;
+  background-color: #9CA2C4;
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
 }
 
 .title {

@@ -6,6 +6,7 @@ $(document).ready(function(){
   var markAsRead = $('.mark-as-read');
   var markAsUnread = $('.mark-as-unread');
   var deleteEmails = $('.delete-selected-emails');
+  var unreadCount = $('.unread-count');
 
   if(sessionStorage.length > 0){
     for (var j = 0; j < allCheckboxes.length; j++) {
@@ -67,8 +68,22 @@ $(document).ready(function(){
         allCheckboxes[e].checked = false;
         allCheckboxes.parents('tr').removeClass('checked');
       });
+      $('.mark-as-read, .mark-as-unread, .delete-selected-emails').attr('disabled', 'disabled');
     }
   });
+
+
+
+  // Event Delegated version of below
+  // $('.emails').on('click', 'input', function(){
+  //   var box = $(this);
+  //
+  // });
+
+
+
+
+
 
   allCheckboxes.each(function(e,i){
     $(this).click(function(){
@@ -84,6 +99,24 @@ $(document).ready(function(){
         checkAllIcon.removeClass('fa-minus-square-o');
         $('.mark-as-read, .mark-as-unread, .delete-selected-emails').attr('disabled', 'disabled');
       }
+
+      //update remove label list to only include labels from emails that are selected
+      var labelSpans = $(this).parents('tr').children('.snippet').children('span');
+      console.log(labelSpans);
+      var labels = [];
+      for (var span in labelSpans){
+        labels.push(span.innerHTML);
+      }
+      console.log(labels);
+      labels.forEach(function(e){
+        var li = document.createElement('li');
+        var a = document.createElement('a');
+        a.className = 'remove-label';
+        a.href = '#';
+        a.innerHTML = e;
+        li.appendChild(a);
+        $('.remove-label-menu').appendChild(li);
+      });
     });
   });
 
@@ -109,9 +142,9 @@ $(document).ready(function(){
     selected.each(function(e){
       var id = $(this).parents('tr').children('td:first').children('div').attr('name');
       var count = $('.unread-count');
-      count.html(Number(count.html()) - 1);
       $(this).parents('tr').removeClass('unread');
       $(this).parents('tr').addClass('read');
+      count.html($('.unread').length);
       var data = {"read": true};
       var xhr = new XMLHttpRequest;
       xhr.open('post', '/inbox/'+id, true)
@@ -119,6 +152,7 @@ $(document).ready(function(){
       xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
       xhr.send(JSON.stringify(data));
     });
+
   });
 
   markAsUnread.click(function(){
@@ -126,9 +160,9 @@ $(document).ready(function(){
     selected.each(function(e){
       var id = $(this).parents('tr').children('td:first').children('div').attr('name');
       var count = $('.unread-count');
-      count.html(Number(count.html()) + 1);
       $(this).parents('tr').removeClass('read');
       $(this).parents('tr').addClass('unread');
+      count.html($('.unread').length);
       var data = {"read": false};
       var xhr = new XMLHttpRequest;
       xhr.open('post', '/inbox/'+id, true)

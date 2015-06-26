@@ -11,10 +11,22 @@ $(document).ready(function(){
       selected.each(function(j){
         var id = $(this).parents('tr').children('td:first').children('div').attr('name');
         var snippet = $(this).parents('tr').children('td.snippet');
-        var labelDiv = document.createElement('div');
-        labelDiv.className = 'label';
-        labelDiv.innerHTML = labelName;
-        snippet.prepend(labelDiv);
+        var labels = $(this).parents('tr').children('td.snippet').children('.label');
+        var temp = 0;
+        for ( var f = 0; f < labels.length; f++){
+          if (labels[f].innerHTML === labelName){
+            temp = 1;
+            break;
+          } else {
+            temp = -1;
+          }
+        }
+        if (temp != 1){
+          var labelDiv = document.createElement('div');
+          labelDiv.className = 'label';
+          labelDiv.innerHTML = labelName;
+          snippet.prepend(labelDiv);
+        }
         var xhr = new XMLHttpRequest;
         var data = {"label": labelName};
         xhr.open('post', '/inbox/'+id, true);
